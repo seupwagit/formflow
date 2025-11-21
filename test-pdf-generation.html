@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Geração de PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #1976D2;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .log {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .warning { background-color: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+        .info { background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Geração de PDF com Template</h1>
+    
+    <div class="test-section">
+        <h3>📋 Configuração do Teste</h3>
+        <p><strong>Template ID:</strong> f859929b-3321-4e27-ae2c-0c265be2becb (FGTS Limpo)</p>
+        <p><strong>Imagem:</strong> https://fzbjggdfmdabimsfruqy.supabase.co/storage/v1/object/public/processed-images/processed/proc_1762090081005_w43335805_page_1.png</p>
+        
+        <button onclick="testCompleteFlow()" id="testBtn">🚀 Testar Fluxo Completo</button>
+        <button onclick="clearLog()">🧹 Limpar Log</button>
+        
+        <div id="status" class="status info" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📊 Log de Execução</h3>
+        <div id="logContainer" class="log">Pronto para teste...\n</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const templateId = 'f859929b-3321-4e27-ae2c-0c265be2becb';
+        const imageUrl = 'https://fzbjggdfmdabimsfruqy.supabase.co/storage/v1/object/public/processed-images/processed/proc_1762090081005_w43335805_page_1.png';
+        
+        let logElement = document.getElementById('logContainer');
+        let statusElement = document.getElementById('status');
+        let testBtn = document.getElementById('testBtn');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${timestamp}] ${message}\n`;
+            console.log(message);
+            logElement.textContent += logMessage;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        function setStatus(message, type = 'info') {
+            statusElement.textContent = message;
+            statusElement.className = `status ${type}`;
+            statusElement.style.display = 'block';
+        }
+        
+        function clearLog() {
+            logElement.textContent = 'Log limpo...\n';
+            statusElement.style.display = 'none';
+        }
+        
+        // Simular dados de formulário
+        const mockFormData = {
+            'nome_completo': 'João Silva Santos',
+            'cpf': '123.456.789-00',
+            'data_nascimento': '15/03/1985',
+            'endereco': 'Rua das Flores, 123',
+            'telefone': '(11) 99999-9999'
+        };
+        
+        // Simular campos do formulário
+        const mockFields = [
+            {
+                id: 'nome_completo',
+                name: 'nome_completo',
+                label: 'Nome Completo',
+                type: 'text',
+                position: { x: 150, y: 200, width: 300, height: 25 }
+            },
+            {
+                id: 'cpf',
+                name: 'cpf',
+                label: 'CPF',
+                type: 'text',
+                position: { x: 150, y: 250, width: 200, height: 25 }
+            },
+            {
+                id: 'data_nascimento',
+                name: 'data_nascimento',
+                label: 'Data de Nascimento',
+                type: 'date',
+                position: { x: 150, y: 300, width: 150, height: 25 }
+            }
+        ];
+        
+        async function testCompleteFlow() {
+            testBtn.disabled = true;
+            setStatus('Executando teste...', 'info');
+            
+            try {
+                log('🚀 Iniciando teste completo de geração de PDF');
+                log('📋 Template ID: ' + templateId);
+                log('🖼️ URL da imagem: ' + imageUrl);
+                log('📝 Dados do formulário: ' + JSON.stringify(mockFormData, null, 2));
+                
+                // Etapa 1: Testar carregamento da imagem
+                log('\n📸 ETAPA 1: Testando carregamento da imagem...');
+                const imageBase64 = await loadImageAsBase64(imageUrl);
+                
+                if (!imageBase64) {
+                    throw new Error('Falha ao carregar imagem do template');
+                }
+                
+                log('✅ Imagem carregada com sucesso');
+                log(`📏 Tamanho Base64: ${imageBase64.length} caracteres`);
+                
+                // Etapa 2: Inicializar jsPDF
+                log('\n📄 ETAPA 2: Inicializando jsPDF...');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                log('✅ jsPDF inicializado');
+                
+                // Etapa 3: Adicionar imagem de fundo
+                log('\n🖼️ ETAPA 3: Adicionando imagem de fundo...');
+                pdf.addImage(imageBase64, 'PNG', 0, 0, 210, 297);
+                log('✅ Imagem de fundo adicionada (210x297mm)');
+                
+                // Etapa 4: Adicionar campos de dados
+                log('\n📝 ETAPA 4: Adicionando campos de dados...');
+                pdf.setFontSize(12);
+                pdf.setTextColor(0, 100, 200); // Azul
+                
+                let fieldsAdded = 0;
+                mockFields.forEach(field => {
+                    const value = mockFormData[field.name];
+                    if (value) {
+                        // Converter posição de pixels para mm
+                        const x = (field.position.x * 210) / 794;
+                        const y = (field.position.y * 297) / 1123;
+                        
+                        pdf.text(`${field.label}: ${value}`, x, y);
+                        log(`   ✅ ${field.label}: "${value}" em (${x.toFixed(1)}, ${y.toFixed(1)})mm`);
+                        fieldsAdded++;
+                    }
+                });
+                
+                log(`✅ ${fieldsAdded} campo(s) adicionado(s)`);
+                
+                // Etapa 5: Adicionar informações de teste
+                log('\n📊 ETAPA 5: Adicionando informações de teste...');
+                pdf.setFontSize(10);
+                pdf.setTextColor(100, 100, 100); // Cinza
+                
+                const testInfo = [
+                    'DOCUMENTO DE TESTE',
+                    `Gerado em: ${new Date().toLocaleString('pt-BR')}`,
+                    `Template: ${templateId}`,
+                    'Sistema: FormFlow PDF Generator'
+                ];
+                
+                testInfo.forEach((info, index) => {
+                    pdf.text(info, 15, 15 + (index * 5));
+                });
+                
+                log('✅ Informações de teste adicionadas');
+                
+                // Etapa 6: Gerar e baixar PDF
+                log('\n💾 ETAPA 6: Gerando arquivo PDF...');
+                const pdfBlob = pdf.output('blob');
+                const url = URL.createObjectURL(pdfBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `teste_template_${templateId.substring(0, 8)}_${Date.now()}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                log('✅ PDF gerado e baixado com sucesso!');
+                log(`📁 Nome do arquivo: ${link.download}`);
+                
+                // Sucesso!
+                log('\n🎉 TESTE CONCLUÍDO COM SUCESSO!');
+                setStatus('✅ Teste concluído com sucesso! PDF baixado.', 'success');
+                
+            } catch (error) {
+                log(`\n❌ ERRO NO TESTE: ${error.message}`);
+                log(`Stack: ${error.stack}`);
+                setStatus(`❌ Erro: ${error.message}`, 'error');
+            } finally {
+                testBtn.disabled = false;
+            }
+        }
+        
+        async function loadImageAsBase64(imageUrl) {
+            try {
+                log(`🔍 Carregando imagem: ${imageUrl}`);
+                
+                // Se já é base64, retornar diretamente
+                if (imageUrl.startsWith('data:image/')) {
+                    log('✅ Imagem já está em Base64');
+                    return imageUrl;
+                }
+
+                // Tentativa 1: Fetch direto
+                try {
+                    log('🔄 Tentativa 1: Fetch direto...');
+                    const response = await fetch(imageUrl, {
+                        mode: 'cors',
+                        credentials: 'omit',
+                        headers: {
+                            'Accept': 'image/*'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const blob = await response.blob();
+                    log(`✅ Blob obtido: ${blob.size} bytes, tipo: ${blob.type}`);
+                    
+                    const base64 = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.onerror = () => reject(new Error('Erro ao converter para Base64'));
+                        reader.readAsDataURL(blob);
+                    });
+                    
+                    log(`✅ Conversão Base64 concluída: ${base64.length} caracteres`);
+                    return base64;
+                    
+                } catch (fetchError) {
+                    log(`⚠️ Fetch direto falhou: ${fetchError.message}`);
+                }
+
+                // Tentativa 2: Usando Image element
+                try {
+                    log('🔄 Tentativa 2: Usando Image element...');
+                    
+                    const img = new Image();
+                    img.crossOrigin = 'anonymous';
+                    
+                    const base64 = await new Promise((resolve, reject) => {
+                        img.onload = () => {
+                            try {
+                                const canvas = document.createElement('canvas');
+                                const ctx = canvas.getContext('2d');
+                                
+                                if (!ctx) {
+                                    reject(new Error('Não foi possível obter contexto do canvas'));
+                                    return;
+                                }
+                                
+                                canvas.width = img.width;
+                                canvas.height = img.height;
+                                ctx.drawImage(img, 0, 0);
+                                
+                                const dataURL = canvas.toDataURL('image/png');
+                                log(`✅ Canvas convertido: ${img.width}x${img.height}`);
+                                resolve(dataURL);
+                            } catch (canvasError) {
+                                reject(canvasError);
+                            }
+                        };
+                        
+                        img.onerror = () => reject(new Error('Erro ao carregar imagem'));
+                        
+                        // Timeout de 10 segundos
+                        setTimeout(() => reject(new Error('Timeout ao carregar imagem')), 10000);
+                    });
+                    
+                    img.src = imageUrl;
+                    return base64;
+                    
+                } catch (imageError) {
+                    log(`⚠️ Image element falhou: ${imageError.message}`);
+                }
+
+                throw new Error('Todas as tentativas de carregamento falharam');
+                
+            } catch (error) {
+                log(`❌ Erro ao carregar imagem: ${error.message}`);
+                return null;
+            }
+        }
+        
+        // Inicialização
+        window.onload = function() {
+            log('🚀 Página de teste carregada e pronta!');
+            log('📋 Clique em "Testar Fluxo Completo" para iniciar o teste');
+        };
+    </script>
+</body>
+</html>

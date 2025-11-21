@@ -1,0 +1,14 @@
+[
+  {
+    "id": "f9fc5160-3d9f-4daa-81da-13e780d9bad7",
+    "template_id": "ad2ef918-224e-4de4-888f-da8d5e64ac58",
+    "version_number": 1,
+    "image_paths": [
+      "https://fzbjggdfmdabimsfruqy.supabase.co/storage/v1/object/public/processed-images/processed/proc_1763131070039_i55saklmg_page_1.png"
+    ],
+    "pdf_path": null,
+    "is_current": true,
+    "created_at": "2025-11-14T15:35:32.205727+00:00",
+    "created_by": null
+  }
+]

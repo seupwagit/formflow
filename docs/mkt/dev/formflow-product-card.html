@@ -1,0 +1,510 @@
+<!-- 
+  CARD DO FORMFLOW PARA HOMEPAGE DA FLASHLIGHT
+  Adicione este código na seção de produtos da família Flow
+-->
+
+<style>
+.produto-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.produto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+}
+
+.produto-card.formflow {
+    border-top: 4px solid #6366F1;
+}
+
+.produto-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #EC4899, #F59E0B);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.produto-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.produto-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 0.5rem;
+}
+
+.produto-tagline {
+    font-size: 1rem;
+    color: #6366F1;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.produto-descricao {
+    font-size: 1rem;
+    color: #6B7280;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.features-list li {
+    padding: 0.75rem 0;
+    color: #374151;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.features-list li:before {
+    content: "✓";
+    color: #10B981;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 0.75rem;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: #F9FAFB;
+    border-radius: 12px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #6366F1;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #6366F1;
+    border: 2px solid #6366F1;
+}
+
+.btn-secondary:hover {
+    background: #6366F1;
+    color: white;
+}
+
+.use-cases {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #EEF2FF;
+    border-radius: 8px;
+}
+
+.use-cases-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #4F46E5;
+    margin-bottom: 0.75rem;
+}
+
+.use-cases-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.use-case-tag {
+    background: white;
+    color: #6366F1;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!-- CARD DO FORMFLOW -->
+<div class="produto-card formflow">
+    <!-- Badge "Novo" -->
+    <div class="produto-badge">✨ Novo</div>
+    
+    <!-- Ícone -->
+    <div class="produto-icon">
+        📋
+    </div>
+    
+    <!-- Título e Tagline -->
+    <h3>FormFlow</h3>
+    <p class="produto-tagline">Formulários Digitais Inteligentes</p>
+    
+    <!-- Descrição -->
+    <p class="produto-descricao">
+        Transforme PDFs em formulários digitais com IA em minutos. 
+        Centralize dados, elimine planilhas Excel desorganizadas e 
+        gere relatórios em tempo real.
+    </p>
+    
+    <!-- Estatísticas -->
+    <div class="stats-row">
+        <div class="stat">
+            <span class="stat-number">95%</span>
+            <span class="stat-label">Economia de Tempo</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">R$ 15k</span>
+            <span class="stat-label">Economia/Ano</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">10min</span>
+            <span class="stat-label">Setup</span>
+        </div>
+    </div>
+    
+    <!-- Features -->
+    <ul class="features-list">
+        <li>Digitalização automática com IA</li>
+        <li>Coleta offline em qualquer dispositivo</li>
+        <li>Relatórios avançados em tempo real</li>
+        <li>Dados centralizados e seguros (LGPD)</li>
+    </ul>
+    
+    <!-- Casos de Uso -->
+    <div class="use-cases">
+        <div class="use-cases-title">Ideal para:</div>
+        <div class="use-cases-tags">
+            <span class="use-case-tag">🏗️ Construção</span>
+            <span class="use-case-tag">🏭 Indústria</span>
+            <span class="use-case-tag">🏥 Saúde</span>
+            <span class="use-case-tag">🏢 Facilities</span>
+            <span class="use-case-tag">📋 Auditorias</span>
+        </div>
+    </div>
+    
+    <!-- CTAs -->
+    <div class="cta-buttons">
+        <a href="/formflow" class="btn btn-primary">
+            Conhecer FormFlow
+        </a>
+        <a href="/formflow/demo" class="btn btn-secondary">
+            Ver Demo
+        </a>
+    </div>
+</div>
+
+<!-- 
+  VERSÃO COMPACTA (Para grid com mais produtos)
+-->
+<div class="produto-card formflow compact">
+    <div class="produto-badge">✨ Novo</div>
+    <div class="produto-icon">📋</div>
+    <h3>FormFlow</h3>
+    <p class="produto-tagline">Formulários Digitais com IA</p>
+    <p class="produto-descricao">
+        Digitalize formulários em 10 minutos. Economize 95% do tempo 
+        e R$ 15.000/ano eliminando planilhas desorganizadas.
+    </p>
+    <div class="cta-buttons">
+        <a href="/formflow" class="btn btn-primary">Conhecer</a>
+    </div>
+</div>
+
+<!-- 
+  INTEGRAÇÃO COM OUTROS PRODUTOS FLOW
+  Adicione esta seção na página de cada produto
+-->
+<section class="integracao-flow">
+    <h3>Funciona Melhor Junto</h3>
+    <div class="integracao-card">
+        <div class="integracao-icon">🔄</div>
+        <h4>FormFlow + [Outro Produto Flow]</h4>
+        <p>
+            Use FormFlow para coletar dados de inspeção e [Produto X] 
+            para gerenciar o workflow de aprovação e distribuição.
+        </p>
+        <a href="/integracoes" class="btn-link">Ver Como Integrar →</a>
+    </div>
+</section>
+
+<style>
+.integracao-flow {
+    margin: 4rem 0;
+    padding: 3rem;
+    background: linear-gradient(135deg, #F9FAFB 0%, #EEF2FF 100%);
+    border-radius: 16px;
+}
+
+.integracao-flow h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #1F2937;
+}
+
+.integracao-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.integracao-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.integracao-card h4 {
+    font-size: 1.5rem;
+    color: #6366F1;
+    margin-bottom: 1rem;
+}
+
+.integracao-card p {
+    color: #6B7280;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.btn-link {
+    color: #6366F1;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-link:hover {
+    color: #4F46E5;
+    transform: translateX(5px);
+}
+</style>
+
+<!-- 
+  BANNER DE DESTAQUE (Para homepage)
+-->
+<div class="formflow-banner">
+    <div class="banner-content">
+        <div class="banner-badge">✨ Novo Produto Flow</div>
+        <h2>Apresentando o FormFlow</h2>
+        <p>
+            Transforme formulários em papel em digitais com IA. 
+            Economize 95% do tempo e R$ 15.000/ano.
+        </p>
+        <div class="banner-cta">
+            <a href="/formflow" class="btn btn-primary">Conhecer FormFlow</a>
+            <a href="/formflow/demo" class="btn btn-secondary">Ver Demo</a>
+        </div>
+    </div>
+    <div class="banner-image">
+        <!-- Imagem ou vídeo do produto -->
+        <img src="/images/formflow-hero.png" alt="FormFlow Demo">
+    </div>
+</div>
+
+<style>
+.formflow-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 4rem;
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    border-radius: 20px;
+    color: white;
+    margin: 4rem 0;
+}
+
+.banner-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.banner-content h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.banner-content p {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.banner-cta {
+    display: flex;
+    gap: 1rem;
+}
+
+.banner-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .formflow-banner {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+    
+    .banner-content h2 {
+        font-size: 2rem;
+    }
+    
+    .banner-cta {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!-- 
+  JAVASCRIPT PARA ANIMAÇÕES
+-->
+<script>
+// Animação de entrada do card
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                entry.target.style.transition = 'all 0.6s ease-out';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, 100);
+            
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observar todos os cards do FormFlow
+document.querySelectorAll('.produto-card.formflow').forEach(card => {
+    observer.observe(card);
+});
+
+// Tracking de cliques
+document.querySelectorAll('.produto-card.formflow .btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        const action = this.textContent.trim();
+        console.log('FormFlow CTA:', action);
+        
+        // Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'formflow_cta_click', {
+                'action': action,
+                'location': 'product_card'
+            });
+        }
+        
+        // Mixpanel
+        if (typeof mixpanel !== 'undefined') {
+            mixpanel.track('FormFlow CTA Click', {
+                'action': action,
+                'location': 'product_card'
+            });
+        }
+    });
+});
+
+// Hover effect nos stats
+document.querySelectorAll('.stat').forEach(stat => {
+    stat.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    stat.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+});
+</script>

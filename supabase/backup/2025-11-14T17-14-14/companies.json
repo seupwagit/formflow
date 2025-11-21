@@ -1,0 +1,53 @@
+[
+  {
+    "id": "5991fde2-8b10-4bb9-9cd6-04e202452f91",
+    "name": "Empresa Exemplo LTDA",
+    "document": "12.345.678/0001-90",
+    "document_type": "CNPJ",
+    "email": "contato@exemplo.com",
+    "phone": "(11) 99999-9999",
+    "address": null,
+    "contact_person": "João Silva",
+    "status": "active",
+    "logo_url": null,
+    "website": null,
+    "notes": null,
+    "created_at": "2025-11-05T16:06:05.181084+00:00",
+    "updated_at": "2025-11-05T16:06:05.181084+00:00",
+    "created_by": null
+  },
+  {
+    "id": "2467e70b-e55e-46d7-9f25-fde1853a01d6",
+    "name": "Consultoria ABC",
+    "document": "98.765.432/0001-10",
+    "document_type": "CNPJ",
+    "email": "admin@abc.com",
+    "phone": "(21) 88888-8888",
+    "address": null,
+    "contact_person": "Maria Santos",
+    "status": "active",
+    "logo_url": null,
+    "website": null,
+    "notes": null,
+    "created_at": "2025-11-05T16:06:05.181084+00:00",
+    "updated_at": "2025-11-05T16:06:05.181084+00:00",
+    "created_by": null
+  },
+  {
+    "id": "cbe7c56a-6f56-4820-9552-2f58d5f0b860",
+    "name": "Freelancer XYZ",
+    "document": "123.456.789-00",
+    "document_type": "CPF",
+    "email": "xyz@freelancer.com",
+    "phone": "(31) 77777-7777",
+    "address": null,
+    "contact_person": "Pedro Costa",
+    "status": "active",
+    "logo_url": null,
+    "website": null,
+    "notes": null,
+    "created_at": "2025-11-05T16:06:05.181084+00:00",
+    "updated_at": "2025-11-05T16:06:05.181084+00:00",
+    "created_by": null
+  }
+]

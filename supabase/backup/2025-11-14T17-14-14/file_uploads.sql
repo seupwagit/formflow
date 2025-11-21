@@ -1,0 +1,2 @@
+-- Tabela file_uploads vazia
+-- Data: 2025-11-14T17:14:16.158Z

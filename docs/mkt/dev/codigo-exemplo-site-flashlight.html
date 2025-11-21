@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormFlow - Formulários Digitais Inteligentes | Flashlight</title>
+    <meta name="description" content="Transforme PDFs em formulários digitais com IA. Centralize dados, elimine planilhas Excel e gere relatórios em tempo real. Teste grátis 30 dias.">
+    
+    <!-- Estilos -->
+    <style>
+        :root {
+            --primary: #6366F1;
+            --secondary: #8B5CF6;
+            --accent: #EC4899;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Section */
+        section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #6B7280;
+            margin-bottom: 4rem;
+        }
+        
+        /* Pain Points */
+        .pain-points {
+            background: var(--light);
+        }
+        
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pain-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .pain-item h3 {
+            color: #EF4444;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: white;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Features */
+        .features {
+            background: var(--light);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Use Cases */
+        .use-cases {
+            background: white;
+        }
+        
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .use-case {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .use-case-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .use-case h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .use-case ul {
+            list-style: none;
+        }
+        
+        .use-case li {
+            padding: 0.25rem 0;
+            color: #6B7280;
+        }
+        
+        /* ROI Section */
+        .roi {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .roi-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .roi-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .roi-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Pricing */
+        .pricing {
+            background: var(--light);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-period {
+            color: #6B7280;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .cta-final h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-final p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .benefits-list {
+            display: inline-block;
+            text-align: left;
+            margin: 2rem auto;
+        }
+        
+        .benefits-list li {
+            font-size: 1.25rem;
+            padding: 0.5rem 0;
+            list-style: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .cta-final h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Pare de Perder Tempo com<br>Planilhas Desorganizadas</h1>
+            <p>Transforme formulários em papel em digitais com IA em 10 minutos</p>
+            <div class="cta-buttons">
+                <a href="#teste-gratis" class="btn btn-primary">Começar Teste Grátis - 30 Dias</a>
+                <a href="#demo" class="btn btn-secondary">Ver Demonstração</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="pain-points">
+        <div class="container">
+            <h2 class="section-title">Sua empresa ainda sofre com...</h2>
+            <div class="pain-grid">
+                <div class="pain-item">
+                    <h3>❌ Planilhas Desorganizadas</h3>
+                    <p>Dezenas de arquivos Excel espalhados por e-mails, pastas e computadores diferentes</p>
+                </div>
+                <div class="pain-item">
+                    <h3>❌ Dados Duplicados</h3>
+                    <p>Informações inconsistentes e desatualizadas que ninguém confia</p>
+                </div>
+                <div class="pain-item">
+                    <h3>❌ Trabalho Manual</h3>
+                    <p>Horas perdidas digitando manualmente dados de formulários em papel</p>
+                </div>
+                <div class="pain-item">
+                    <h3>❌ Falta de Rastreabilidade</h3>
+                    <p>Impossível saber quem preencheu, quando e onde os dados foram coletados</p>
+                </div>
+                <div class="pain-item">
+                    <h3>❌ Relatórios Demorados</h3>
+                    <p>Dias para compilar relatórios que já estão desatualizados quando ficam prontos</p>
+                </div>
+                <div class="pain-item">
+                    <h3>❌ Perda de Documentos</h3>
+                    <p>Formulários importantes perdidos em pilhas de papel ou pastas digitais</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Como o FormFlow Funciona</h2>
+            <p class="section-subtitle">Digitalize seus formulários em 4 passos simples</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>📄 Carregue seu PDF</h3>
+                    <p>Faça upload do seu formulário em papel (PDF) na plataforma</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>🤖 IA Detecta Campos</h3>
+                    <p>Nossa inteligência artificial reconhece automaticamente todos os campos</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>✏️ Ajuste e Publique</h3>
+                    <p>Personalize propriedades e publique em minutos</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>📊 Colete e Analise</h3>
+                    <p>Dados centralizados e relatórios instantâneos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Funcionalidades Poderosas</h2>
+            <p class="section-subtitle">Tudo que você precisa para transformar sua coleta de dados</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Digitalização Automática com IA</h3>
+                    <p>Reconhecimento inteligente de campos com 95% de precisão</p>
+                    <ul class="feature-list">
+                        <li>Detecção automática de tipos de campo</li>
+                        <li>Texto, números, datas, checkboxes</li>
+                        <li>Economize 95% do tempo</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Coleta de Dados Moderna</h3>
+                    <p>Funciona em qualquer dispositivo, online ou offline</p>
+                    <ul class="feature-list">
+                        <li>Celular, tablet, computador</li>
+                        <li>Modo offline com sincronização</li>
+                        <li>Validação em tempo real</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Relatórios Avançados</h3>
+                    <p>Visualize e analise dados em tempo real</p>
+                    <ul class="feature-list">
+                        <li>Tabelas, cards, gráficos, árvore</li>
+                        <li>Filtros avançados e busca global</li>
+                        <li>Exportação Excel/CSV</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Hierarquia Organizacional</h3>
+                    <p>Organize por empresa, contrato e template</p>
+                    <ul class="feature-list">
+                        <li>Estrutura hierárquica completa</li>
+                        <li>Controle de acesso por perfil</li>
+                        <li>Rastreabilidade 100%</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Segurança e Compliance</h3>
+                    <p>Dados protegidos e em conformidade com LGPD</p>
+                    <ul class="feature-list">
+                        <li>Criptografia AES-256</li>
+                        <li>Backup automático diário</li>
+                        <li>Auditoria completa</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Integrações</h3>
+                    <p>Conecte com seus sistemas existentes</p>
+                    <ul class="feature-list">
+                        <li>API REST completa</li>
+                        <li>Webhooks para automação</li>
+                        <li>Sincronização bidirecional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases">
+        <div class="container">
+            <h2 class="section-title">Quem Usa o FormFlow</h2>
+            <p class="section-subtitle">Soluções para diversos setores e necessidades</p>
+            
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">🏗️</div>
+                    <h3>Construção Civil</h3>
+                    <ul>
+                        <li>• Inspeções de obra</li>
+                        <li>• Checklists de segurança</li>
+                        <li>• Relatórios de medição</li>
+                        <li>• Controle de qualidade</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-icon">🏭</div>
+                    <h3>Indústria</h3>
+                    <ul>
+                        <li>• Ordens de serviço</li>
+                        <li>• Inspeções de equipamentos</li>
+                        <li>• Controle de qualidade</li>
+                        <li>• Relatórios de não-conformidade</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-icon">🏥</div>
+                    <h3>Saúde</h3>
+                    <ul>
+                        <li>• Prontuários digitais</li>
+                        <li>• Anamneses padronizadas</li>
+                        <li>• Consentimentos informados</li>
+                        <li>• Avaliações de pacientes</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-icon">🏢</div>
+                    <h3>Facilities</h3>
+                    <ul>
+                        <li>• Inspeções prediais</li>
+                        <li>• Manutenções preventivas</li>
+                        <li>• Controle de acesso</li>
+                        <li>• Gestão de fornecedores</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-icon">🚚</div>
+                    <h3>Logística</h3>
+                    <ul>
+                        <li>• Checklists de veículos</li>
+                        <li>• Controle de entregas</li>
+                        <li>• Inspeções de carga</li>
+                        <li>• Relatórios de ocorrências</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-icon">📋</div>
+                    <h3>Auditorias</h3>
+                    <ul>
+                        <li>• Checklists de auditoria</li>
+                        <li>• Avaliações de conformidade</li>
+                        <li>• Relatórios de inspeção</li>
+                        <li>• Documentação de processos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI -->
+    <section class="roi">
+        <div class="container">
+            <h2 class="section-title">Resultados Comprovados</h2>
+            <p class="section-subtitle">Números reais de empresas que usam o FormFlow</p>
+            
+            <div class="roi-grid">
+                <div class="roi-card">
+                    <div class="roi-number">95%</div>
+                    <div class="roi-label">Menos tempo criando formulários</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">80%</div>
+                    <div class="roi-label">Menos tempo preenchendo dados</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">90%</div>
+                    <div class="roi-label">Menos tempo gerando relatórios</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">R$ 15k</div>
+                    <div class="roi-label">Economia média anual</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">3x</div>
+                    <div class="roi-label">Mais produtividade</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">100%</div>
+                    <div class="roi-label">Rastreabilidade</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Planos e Preços</h2>
+            <p class="section-subtitle">Escolha o plano ideal para sua empresa</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-price">Grátis</div>
+                    <div class="pricing-period">Para sempre</div>
+                    <ul class="pricing-features">
+                        <li>✓ 1 empresa</li>
+                        <li>✓ 3 templates</li>
+                        <li>✓ 100 documentos/mês</li>
+                        <li>✓ Suporte por e-mail</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Começar Grátis</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MAIS POPULAR</div>
+                    <div class="pricing-name">Professional</div>
+                    <div class="pricing-price">R$ 297</div>
+                    <div class="pricing-period">/mês</div>
+                    <ul class="pricing-features">
+                        <li>✓ 5 empresas</li>
+                        <li>✓ Templates ilimitados</li>
+                        <li>✓ 1.000 documentos/mês</li>
+                        <li>✓ Suporte prioritário</li>
+                        <li>✓ API e integrações</li>
+                        <li>✓ Relatórios avançados</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Testar 30 Dias Grátis</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">Sob consulta</div>
+                    <ul class="pricing-features">
+                        <li>✓ Empresas ilimitadas</li>
+                        <li>✓ Templates ilimitados</li>
+                        <li>✓ Documentos ilimitados</li>
+                        <li>✓ Suporte 24/7</li>
+                        <li>✓ Customizações</li>
+                        <li>✓ Treinamento incluso</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary">Falar com Vendas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Transforme Sua Coleta de Dados Hoje</h2>
+            <p>Teste grátis por 30 dias - Sem cartão de crédito</p>
+            
+            <ul class="benefits-list">
+                <li>✅ Acesso completo ao plano Professional</li>
+                <li>✅ Migração de dados gratuita (valor R$ 2.000)</li>
+                <li>✅ Suporte prioritário durante o teste</li>
+                <li>✅ Sem compromisso - cancele quando quiser</li>
+            </ul>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Começar Teste Grátis Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Analytics tracking
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                console.log('CTA Clicked:', action);
+                // gtag('event', 'cta_click', { 'action': action });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Carregamento de Imagem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .success { border-color: #4CAF50; background-color: #f8fff8; }
+        .error { border-color: #f44336; background-color: #fff8f8; }
+        .warning { border-color: #ff9800; background-color: #fffaf0; }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #1976D2;
+        }
+        .log {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Teste de Carregamento de Imagem do Template</h1>
+    
+    <div class="test-section">
+        <h3>📸 Imagem do Template FGTS</h3>
+        <p><strong>URL:</strong> <span id="imageUrl">https://fzbjggdfmdabimsfruqy.supabase.co/storage/v1/object/public/processed-images/processed/proc_1762090081005_w43335805_page_1.png</span></p>
+        
+        <button onclick="testDirectLoad()">Teste 1: Carregamento Direto</button>
+        <button onclick="testFetchLoad()">Teste 2: Fetch + Blob</button>
+        <button onclick="testBase64Load()">Teste 3: Conversão Base64</button>
+        <button onclick="testPDFGeneration()">Teste 4: Geração PDF</button>
+        
+        <div id="imageContainer"></div>
+        <div id="logContainer" class="log"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const imageUrl = 'https://fzbjggdfmdabimsfruqy.supabase.co/storage/v1/object/public/processed-images/processed/proc_1762090081005_w43335805_page_1.png';
+        let logElement = document.getElementById('logContainer');
+        
+        function log(message) {
+            console.log(message);
+            logElement.textContent += new Date().toLocaleTimeString() + ' - ' + message + '\n';
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        function clearLog() {
+            logElement.textContent = '';
+        }
+        
+        // Teste 1: Carregamento direto da imagem
+        function testDirectLoad() {
+            clearLog();
+            log('🔍 Iniciando teste de carregamento direto...');
+            
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            
+            img.onload = function() {
+                log('✅ Imagem carregada com sucesso!');
+                log(`📏 Dimensões: ${img.width}x${img.height}`);
+                
+                const container = document.getElementById('imageContainer');
+                container.innerHTML = '';
+                container.appendChild(img);
+                
+                log('✅ Teste 1 concluído com sucesso');
+            };
+            
+            img.onerror = function(error) {
+                log('❌ Erro ao carregar imagem diretamente');
+                log('Erro: ' + error.toString());
+            };
+            
+            img.src = imageUrl;
+        }
+        
+        // Teste 2: Fetch + Blob
+        async function testFetchLoad() {
+            clearLog();
+            log('🔍 Iniciando teste com fetch...');
+            
+            try {
+                const response = await fetch(imageUrl, {
+                    mode: 'cors',
+                    credentials: 'omit'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                log('✅ Fetch realizado com sucesso');
+                log(`📊 Status: ${response.status}`);
+                log(`📏 Tamanho: ${response.headers.get('content-length')} bytes`);
+                log(`🎯 Tipo: ${response.headers.get('content-type')}`);
+                
+                const blob = await response.blob();
+                log('✅ Blob criado com sucesso');
+                
+                const img = new Image();
+                img.onload = function() {
+                    log('✅ Imagem carregada do blob!');
+                    log(`📏 Dimensões: ${img.width}x${img.height}`);
+                    
+                    const container = document.getElementById('imageContainer');
+                    container.innerHTML = '';
+                    container.appendChild(img);
+                    
+                    URL.revokeObjectURL(img.src);
+                    log('✅ Teste 2 concluído com sucesso');
+                };
+                
+                img.onerror = function(error) {
+                    log('❌ Erro ao carregar imagem do blob');
+                };
+                
+                img.src = URL.createObjectURL(blob);
+                
+            } catch (error) {
+                log('❌ Erro no fetch: ' + error.message);
+            }
+        }
+        
+        // Teste 3: Conversão para Base64
+        async function testBase64Load() {
+            clearLog();
+            log('🔍 Iniciando teste de conversão Base64...');
+            
+            try {
+                const response = await fetch(imageUrl, {
+                    mode: 'cors',
+                    credentials: 'omit'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const blob = await response.blob();
+                log('✅ Blob obtido com sucesso');
+                
+                const base64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+                
+                log('✅ Conversão Base64 realizada!');
+                log(`📏 Tamanho Base64: ${base64.length} caracteres`);
+                log(`🎯 Prefixo: ${base64.substring(0, 50)}...`);
+                
+                const img = new Image();
+                img.onload = function() {
+                    log('✅ Imagem carregada do Base64!');
+                    log(`📏 Dimensões: ${img.width}x${img.height}`);
+                    
+                    const container = document.getElementById('imageContainer');
+                    container.innerHTML = '';
+                    container.appendChild(img);
+                    
+                    log('✅ Teste 3 concluído com sucesso');
+                };
+                
+                img.src = base64;
+                
+            } catch (error) {
+                log('❌ Erro na conversão Base64: ' + error.message);
+            }
+        }
+        
+        // Teste 4: Geração de PDF
+        async function testPDFGeneration() {
+            clearLog();
+            log('🔍 Iniciando teste de geração PDF...');
+            
+            try {
+                // Carregar imagem como Base64
+                const response = await fetch(imageUrl, {
+                    mode: 'cors',
+                    credentials: 'omit'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const blob = await response.blob();
+                const base64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+                
+                log('✅ Imagem convertida para Base64');
+                
+                // Criar PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                log('✅ jsPDF inicializado');
+                
+                // Adicionar imagem ao PDF
+                pdf.addImage(base64, 'PNG', 0, 0, 210, 297);
+                log('✅ Imagem adicionada ao PDF');
+                
+                // Adicionar texto de teste
+                pdf.setFontSize(12);
+                pdf.setTextColor(0, 100, 200); // Azul
+                pdf.text('TESTE DE GERAÇÃO PDF', 20, 20);
+                pdf.text('Imagem carregada com sucesso!', 20, 35);
+                pdf.text('Data: ' + new Date().toLocaleString('pt-BR'), 20, 50);
+                
+                log('✅ Texto adicionado ao PDF');
+                
+                // Gerar e baixar PDF
+                const pdfBlob = pdf.output('blob');
+                const url = URL.createObjectURL(pdfBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'teste_template_image.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                log('✅ PDF gerado e baixado com sucesso!');
+                log('✅ Teste 4 concluído com sucesso');
+                
+            } catch (error) {
+                log('❌ Erro na geração do PDF: ' + error.message);
+                log('Stack: ' + error.stack);
+            }
+        }
+        
+        // Executar teste inicial
+        window.onload = function() {
+            log('🚀 Página carregada. Pronto para testes!');
+            log('📸 URL da imagem: ' + imageUrl);
+        };
+    </script>
+</body>
+</html>

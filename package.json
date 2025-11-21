@@ -1,0 +1,45 @@
+{
+  "name": "form-mapper-inspector",
+  "version": "1.0.0",
+  "description": "Sistema de Mapeamento Automático de Formulários de Inspeção",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "setup-pdf": "node scripts/setup-pdf-worker.js",
+    "postinstall": "node scripts/setup-pdf-worker.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.38.0",
+    "@tanstack/react-table": "^8.21.3",
+    "autoprefixer": "^10.4.16",
+    "fabric": "^5.3.0",
+    "jspdf": "^3.0.3",
+    "konva": "^10.0.8",
+    "lucide-react": "^0.292.0",
+    "next": "^14.0.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
+    "postcss": "^8.4.31",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-hook-form": "^7.47.0",
+    "react-konva": "^18.2.10",
+    "react-pdf": "^7.5.1",
+    "tailwindcss": "^3.3.5",
+    "tesseract.js": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/fabric": "^5.3.10",
+    "@types/node": "^20.8.7",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "eslint": "^8.51.0",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "^5.2.2"
+  }
+}
