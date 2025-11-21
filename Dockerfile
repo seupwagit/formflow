@@ -6,8 +6,12 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copiar arquivos de dependências
+# Copiar arquivos de dependências e scripts necessários
 COPY package.json package-lock.json* ./
+COPY scripts ./scripts
+COPY public ./public
+
+# Instalar dependências (postinstall vai copiar pdf.worker)
 RUN npm ci --legacy-peer-deps
 
 # Rebuild do código fonte apenas quando necessário

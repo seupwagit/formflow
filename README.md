@@ -8,9 +8,11 @@ Este projeto está **100% pronto** para deploy no Coolify!
 
 ### 🎯 Começar Agora
 
-**Primeira vez?** → [QUICK-START-COOLIFY.md](./QUICK-START-COOLIFY.md) (5 minutos)
+**✅ STATUS FINAL** → [FINAL-STATUS.md](./FINAL-STATUS.md) (todas as correções aplicadas!)
 
-**Ver tudo?** → [COOLIFY-INDEX.md](./COOLIFY-INDEX.md) (índice completo)
+**Quick Start** → [QUICK-START-COOLIFY.md](./QUICK-START-COOLIFY.md) (5 minutos)
+
+**Ver tudo** → [COOLIFY-INDEX.md](./COOLIFY-INDEX.md) (índice completo)
 
 ### Quick Start
 

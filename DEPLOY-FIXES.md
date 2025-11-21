@@ -30,6 +30,10 @@ npm error peer konva@"^8.0.1 || ^7.2.5 || ^9.0.0" from react-konva@18.2.10
 
 3. **Atualizado `Dockerfile`:**
    ```dockerfile
+   # Copiar scripts antes do npm ci (necessário para postinstall)
+   COPY package.json package-lock.json* ./
+   COPY scripts ./scripts
+   COPY public ./public
    RUN npm ci --legacy-peer-deps
    ```
 
@@ -113,11 +117,31 @@ Isso permite que páginas com `useSearchParams` sejam renderizadas no cliente se
 
 - ✅ `package.json` - Downgrade konva para v9.3.14
 - ✅ `package-lock.json` - Regenerado com --legacy-peer-deps
-- ✅ `Dockerfile` - Adicionado --legacy-peer-deps
+- ✅ `Dockerfile` - Copiar scripts antes do npm ci + --legacy-peer-deps
 - ✅ `.npmrc` - Criado com legacy-peer-deps=true
 - ✅ `next.config.js` - Ignorar erros de TS/ESLint + experimental flag
 - ✅ `app/designer/page.tsx` - Corrigido tipo do updateData
 - ✅ `TROUBLESHOOTING.md` - Adicionadas soluções
+
+### 4. ❌ Erro no postinstall durante Docker build
+
+**Erro Original:**
+```
+Error: Cannot find module '/app/scripts/setup-pdf-worker.js'
+npm error command sh -c node scripts/setup-pdf-worker.js
+```
+
+**Solução Aplicada:**
+
+Atualizado `Dockerfile` para copiar scripts e public antes do `npm ci`:
+```dockerfile
+COPY package.json package-lock.json* ./
+COPY scripts ./scripts
+COPY public ./public
+RUN npm ci --legacy-peer-deps
+```
+
+Isso garante que o script `postinstall` encontre os arquivos necessários.
 
 ## ⚠️ Notas Importantes
 

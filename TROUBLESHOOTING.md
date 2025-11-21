@@ -16,6 +16,17 @@ npm install
 
 No Coolify, force um rebuild completo.
 
+#### Erro: "Cannot find module '/app/scripts/setup-pdf-worker.js'" no Docker
+**Causa:** Script postinstall executando antes dos arquivos serem copiados.
+
+**Solução:**
+O Dockerfile já está configurado para copiar scripts e public antes do npm ci.
+Se o erro persistir, verifique se os arquivos existem no repositório:
+```bash
+ls -la scripts/
+ls -la public/
+```
+
 #### Erro: "Out of memory"
 **Causa:** Build do Next.js consome muita memória.
 
