@@ -9,7 +9,13 @@
     "start": "next start",
     "lint": "next lint",
     "setup-pdf": "node scripts/setup-pdf-worker.js",
-    "postinstall": "node scripts/setup-pdf-worker.js"
+    "postinstall": "node scripts/setup-pdf-worker.js",
+    "check-env": "node scripts/check-env.js",
+    "pre-deploy": "node scripts/pre-deploy.js",
+    "docker:build": "docker build -t formflow .",
+    "docker:run": "docker run -p 3000:3000 --env-file .env.local formflow",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

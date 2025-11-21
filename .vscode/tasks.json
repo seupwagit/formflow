@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Verificar Pré-Deploy",
+      "type": "npm",
+      "script": "pre-deploy",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Verificar Variáveis de Ambiente",
+      "type": "npm",
+      "script": "check-env",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Docker: Build",
+      "type": "npm",
+      "script": "docker:build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Docker: Run",
+      "type": "npm",
+      "script": "docker:run",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Docker Compose: Up",
+      "type": "npm",
+      "script": "docker:up",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

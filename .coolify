@@ -1,0 +1,16 @@
+# Configuração do Coolify
+# Este arquivo é detectado automaticamente pelo Coolify
+
+# Build settings
+BUILD_COMMAND=npm run build
+START_COMMAND=npm start
+PORT=3000
+
+# Health check
+HEALTHCHECK_PATH=/api/health
+HEALTHCHECK_INTERVAL=30
+HEALTHCHECK_TIMEOUT=10
+HEALTHCHECK_RETRIES=3
+
+# Auto-deploy
+AUTO_DEPLOY=true
